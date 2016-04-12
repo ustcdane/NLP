@@ -12,6 +12,7 @@ import numpy as np
 # x axis data
 x=np.arange(-3,3,0.1)
 #rectifier_x=np.arange(-1.1,1.1,0.1)
+# Softplus'(x)=Sigmoid(x)∈(0,1)
 #y axis data
 sigmoid_y=[np.exp(i)/(1+np.exp(i)) for i in x]
 tanh_y=[np.tanh(i) for i in x]
