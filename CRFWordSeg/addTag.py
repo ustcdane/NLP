@@ -8,7 +8,7 @@ def tagFile(origin, tagfile, isTrain = True):
     f = codecs.open(origin, 'r', 'utf-8')
     contents = f.read()
     
-	taglist = tagText(contents, isTrain)
+    taglist = tagText(contents, isTrain)
     fw = codecs.open(tagfile,'w','utf-8')
     fw.write(''.join(taglist))
     fw.close

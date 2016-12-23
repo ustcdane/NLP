@@ -42,7 +42,7 @@ def crf_segment(line, tagger):
     size = tagger.size()
     xsize = tagger.xsize()
     
-	segWord = u''
+    segWord = u''
     for i in range(0, size):
         #for j in range(0, xsize):
         if xsize:

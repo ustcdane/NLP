@@ -1,6 +1,6 @@
 #crf word segment
 
-just sh run.sh.
+To test just: sh run.sh.
 Have fun.
 
 Chinese Word Segmentation using [CRF++][link1].
