@@ -1,5 +1,6 @@
 #http://iamtrask.github.io/2015/07/12/basic-python-network/
-
+# vanishing_grad_example
+#http://cs224d.stanford.edu/notebooks/vanishing_grad_example.html
 print '2 Layer Neural Network: input,output'
 import numpy as np
 # sigmoid function
