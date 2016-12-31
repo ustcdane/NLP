@@ -5,5 +5,6 @@ iamtrask的blog用简单的代码说明了神经网络的工作机制。推荐�
 * https://iamtrask.github.io/2015/07/27/python-network-part2/
 * https://iamtrask.github.io/2015/07/28/dropout/
 * https://iamtrask.github.io/2015/11/15/anyone-can-code-lstm/
-Recurrent Neural Network - A curated list of resources dedicated to RNN
+
+- Recurrent Neural Network - A curated list of resources dedicated to RNN
 *https://github.com/kjw0612/awesome-rnn
