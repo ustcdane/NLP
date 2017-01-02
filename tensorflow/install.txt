@@ -1,0 +1,6 @@
+tensorflow 安装方法：
+http://www.jianshu.com/p/fdb7b54b616e
+
+第十一届中国中文信息学会暑期学校 前沿技术讲习班资料:
+课程主页：http://www.cipsc.org.cn/att1/
+开发环境搭建教程：http://www.cipsc.org.cn/att1/setup_tutorial.html
