@@ -1,0 +1,3 @@
+- https://www.tensorflow.org
+- http://wiki.jikexueyuan.com/project/tensorflow-zh/
+- http://www.cipsc.org.cn/att1/setup_tutorial.html
