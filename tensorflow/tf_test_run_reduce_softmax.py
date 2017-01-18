@@ -39,9 +39,9 @@ with tf.Session() as sess:
     print '\nsoftmax test:'
     x_in = np.array([[1,1]])
     w_in = np.array([[0,1],[1,1]])
-    b_in = np.array([0,0])
+    b_in = np.array([1,0])
     print 'x:\n', x_in
     print 'W:\n', w_in
     print 'b:\n', b_in
     res = sess.run([ySoft], feed_dict={x_:x_in, W:w_in, b:b_in})
-    print 'tf.nn.softmax(tf.matmul(x_in, w_in) + b_in)', res
+    print 'tf.nn.softmax(tf.matmul(x_in, w_in) + b_in):\n', res
