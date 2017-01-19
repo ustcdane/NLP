@@ -14,6 +14,7 @@ init_op = tf.initialize_all_variables()
 
 x = tf.placeholder(tf.float32, shape=(2, 2))
 y = tf.matmul(x, x)
+yX2 = x*x
 y2Times = x + x
 
 #reduce test
@@ -32,8 +33,9 @@ with tf.Session() as sess:
     #rand_array = np.random.rand(2, 2)
     test_array = np.array([[1.,1.,],[2.,2.]])
     print "x:\n", test_array
-    y_, y2Times_, reduce_mean_= sess.run([y, y2Times, reduce_mean], feed_dict={x: test_array})
-    print 'x*x:\n', y_
+    y_, yX2_, y2Times_, reduce_mean_= sess.run([y, yX2, y2Times, reduce_mean], feed_dict={x: test_array})
+    print 'tf.matmul(x, x):\n', y_
+    print 'x*x:\n', yX2_
     print 'x+x:\n', y2Times_
     print 'tf.reduce_mean(x, 1):\n', reduce_mean_
     print '\nsoftmax test:'
