@@ -93,6 +93,18 @@ PLSA(Probabilistic Latent Semantic Analysis, 概率潜在语义分析)由LSA发展而来。LSA
 ![doc-word](https://github.com/ustcdane/NLP/blob/master/PLSA/img/doc-word.png)
 </br>如 此 ， 我 们 得 到 了 一 个 基 于 文 档 集 合D = {d1, d2, ..., dN}和 词 表W ={w1, w2, ..., wM}上的观察矩阵N = (n(di, wj))ij。对于每一观察数据< di, wj >我们假设中间关联一个隐含的主题变量zk ∈ {z1, z2, ..., zK}。我们可以认为主题类别zk是文档中所涉及的概念或者主题。每个文档中可以讨论多个概念或者主题。因此原来的观测二元组< di, wj >就被扩展成了三元组< di, zk, wj >，其中zk是非观测值。在观测矩阵N = (n(di, wj))ij上，我们用如下的框架定义生成模型：
 
+* 以概率P r(di)选择一个文档di；
+* 以概率Pr(zk|di)挑选一个隐性的主题类别zk。
+* 以概率Pr(wj|zk)生成一个词wj；
+</br>
+用贝叶斯网络的语言描述这个过程如下图所示: </br>
+![doc-word](https://github.com/ustcdane/NLP/blob/master/PLSA/img/plsa-bayesian.png)
+</br>
+
+
+
+基于上图，我们可以把观测数据
+
 
 
 
