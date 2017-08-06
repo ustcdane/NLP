@@ -78,16 +78,15 @@ The params are set as :
 python plsa.py dataset3.txt stopwords.dic 30 30 10.0 10 doctopic.txt topicword.txt dictionary.dic topics.txt 
 ```
 
-## ref 
-from  [PLSA](http://zhikaizhang.cn/2016/06/17/%E8%87%AA%E7%84%B6%E8%AF%AD%E8%A8%80%E5%A4%84%E7%90%86%E4%B9%8BPLSA/)
 
-## note (Chinese)
-1. PLSA
+# note (Chinese)
+
+## 1. PLSA
 
 PLSA(Probabilistic Latent Semantic Analysis, 概率潜在语义分析)由LSA发展而来。LSA使用线性代数方法，对document-word矩阵进行SVD分解。PLSA则使用了一个概率图模型，引入了一个隐变量topic（可以认为是文档的主题），然后进行统计推断。
 在语义分析问题中，存在同义词和一词多义这两个严峻的问题，LSA可以很好的解决同义词问题，却无法妥善处理一词多义问题。PLSA则可以同时解决同义词和一词多义两个问题。
 
-2. PLSA 原理
+## 2. PLSA 原理
 
 我们知道文档(一个句子、一个段落或一篇文章)都有它自己的主题，从大的方面讲有经济、历史、音乐、运动、游戏、法律等等主题，PLSA模型就引入了一个隐变量topic来表示这个主题。
 假如给定一个文档集合记为D = {d1, d2, ..., dN}，每个文档中由若干词组成。通过统计得到所有文档中的词表为W = {w1, w2, ..., wM}。如果忽略文档中词的序列，我们可以把观察数据记为一个“文档-词”矩阵，如下图所示。
@@ -99,6 +98,12 @@ PLSA(Probabilistic Latent Semantic Analysis, 概率潜在语义分析)由LSA发展而来。LSA
 
 
 
-3. PLSA 求解
+## 3. PLSA 求解
 
 PLSA通过[EM](https://github.com/ustcdane/NLP/tree/master/Expectation%20Maximizatio(EM))算法，极大化关于隐变量主题Z_k的后验概率似然的期望（极大化过程是带两个约束条件的，所以用拉格朗日乘法来求解），利用EM算法进行反复的迭代计算直至收敛。
+
+
+
+
+# ref 
+from  [PLSA](http://zhikaizhang.cn/2016/06/17/%E8%87%AA%E7%84%B6%E8%AF%AD%E8%A8%80%E5%A4%84%E7%90%86%E4%B9%8BPLSA/)
