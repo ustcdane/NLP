@@ -98,12 +98,15 @@ PLSA(Probabilistic Latent Semantic Analysis, 概率潜在语义分析)由LSA发展而来。LSA
 * 以概率p(wj|zk)生成一个词wj；
 </br>
 用贝叶斯网络的语言描述这个过程如下图所示: </br>
+
 ![plsa-bayesian](https://github.com/ustcdane/NLP/blob/master/PLSA/img/plsa-bayesian.png)
+
 </br>
 基于上图，我们可以把观测数据<di, wj >的联合概率p(di, wj)写成在主题上的边缘概率的和SUM_k{p(di, zk, wj)},其中k=1,2...K，然后基
-于贝叶斯网络进行分解得到p(di, wj) =SUM_k{p(di)p(zk|di)p(wj|zk)},k=1,2...K。
-</br>
+于贝叶斯网络进行分解得到p(di, wj) =SUM_k{p(di)p(zk|di)p(wj|zk)},k=1,2...K。</br>
+
 ![plsa-prob](https://github.com/ustcdane/NLP/blob/master/PLSA/img/plsa-joint.png)
+
 </br>第一个等式是对三者的联合概率分布对其中的隐藏变量 ZZ 的所有取值累加，第二个等式根据图模型的依赖关系将联合概率展开为条件概率，第三个等式只是简单的乘法结合律。这样就计算出了第 ii 篇文档与第 jj 个单词的联合概率分布。
 
 
