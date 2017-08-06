@@ -109,10 +109,10 @@ PLSA(Probabilistic Latent Semantic Analysis, 概率潜在语义分析)由LSA发展而来。LSA
 
 </br>第一个等式是对三者的联合概率分布对其中的隐藏变量 Z 的所有取值累加，第二个等式根据图模型的依赖关系将联合概率展开为条件概率，第三个等式只是简单的乘法结合律。这样就计算出了第 i 篇文档与第 j 个单词的联合概率分布。
 
-** complete-data log likelihood **
+**complete-data log likelihood** </br>
 我们可以得到完整数据的对数似然为：
 
-![plsa-bayesian](https://github.com/ustcdane/NLP/blob/master/PLSA/img/complete-data.png)
+![cp-data](https://github.com/ustcdane/NLP/blob/master/PLSA/img/complete-data.png)
 
 其中 n(di,wj) 表示第 j 个word在第 i 个document中出现的次数。
 上式左边一项对于给定的数据集来说是定值，我们只需要使得右边一项取到最大。
@@ -123,8 +123,20 @@ p(zk|di)和p(wj|zk) 是PLSA模型需要求解的参数,**注意**这里的参数以求和的形式出现在
 ## 3. PLSA 求解
 
 PLSA通过[EM](https://github.com/ustcdane/NLP/tree/master/Expectation%20Maximizatio(EM))算法，极大化关于隐变量主题Z_k的后验概率似然的期望（极大化过程是带两个约束条件的，所以用拉格朗日乘法来求解），利用EM算法进行反复的迭代计算直至收敛。
+对于求解PLSA相关参数的EM算法的步骤是: </br>
+1. E-step: 我们假定待估参数 p(zk|di)和p(wj|zk)是给定的，计算隐变量zk的后验条件概率分布p(zk|di,wj)
+2. M-step: 假定隐变量已经确定的条件下，即在E-step后我们可以认为此事的数据是完全的。最大化最大似然函数的期望（即Q函数）。此时我们使用E-step里计算的隐变量的后验概率p(zk|di,wj)
+，得到新的估计参数值p(zk|di)和p(wj|zk)。
 
+</br>
+![EM1](https://github.com/ustcdane/NLP/blob/master/PLSA/img/EM1.png)
+</br>
+![EM2](https://github.com/ustcdane/NLP/blob/master/PLSA/img/EM2.png)
+</br>
 
+那么何时停止EM算法呢？一种方法是计算完整数据的对数似然，当这个值的变化小于某个阈值时认为已经收敛；另一种方法可以固定迭代次数，进行截断，避免过拟合。
+这就是最大似然估计来确定PLSA待估参数p(zk|di)和p(wj|zk)的过程。如果我们对隐变量zk没有先验知识，那么最大似然估计是合理的。如果我们对文档产生主题p(zk|di)和主题产生词p(wj|zk)的分布
+有先验知识，那么我们就应该用贝叶斯估计，这就是LDA要解决的问题，本质上PLSA和非负矩阵分解(NMF)是等价的。
 
 
 # ref 
