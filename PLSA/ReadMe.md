@@ -129,9 +129,13 @@ PLSA通过[EM](https://github.com/ustcdane/NLP/tree/master/Expectation%20Maximizat
 ，得到新的估计参数值p(zk|di)和p(wj|zk)。
 
 </br>
+
 ![EM1](https://github.com/ustcdane/NLP/blob/master/PLSA/img/EM1.png)
+
 </br>
+
 ![EM2](https://github.com/ustcdane/NLP/blob/master/PLSA/img/EM2.png)
+
 </br>
 
 那么何时停止EM算法呢？一种方法是计算完整数据的对数似然，当这个值的变化小于某个阈值时认为已经收敛；另一种方法可以固定迭代次数，进行截断，避免过拟合。
