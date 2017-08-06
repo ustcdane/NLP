@@ -80,7 +80,7 @@ python plsa.py dataset3.txt stopwords.dic 30 30 10.0 10 doctopic.txt topicword.t
 
 
 # note (Chinese)
-<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=default"></script>
+
 ## 1. PLSA
 
 PLSA(Probabilistic Latent Semantic Analysis, 概率潜在语义分析)由LSA发展而来。LSA使用线性代数方法，对document-word矩阵进行SVD分解。PLSA则使用了一个概率图模型，引入了一个隐变量topic（可以认为是文档的主题），然后进行统计推断。
@@ -91,25 +91,20 @@ PLSA(Probabilistic Latent Semantic Analysis, 概率潜在语义分析)由LSA发展而来。LSA
 我们知道文档(一个句子、一个段落或一篇文章)都有它自己的主题，从大的方面讲有经济、历史、音乐、运动、游戏、法律等等主题，PLSA模型就引入了一个隐变量topic来表示这个主题。
 假如给定一个文档集合记为D = {d1, d2, ..., dN}，每个文档中由若干词组成。通过统计得到所有文档中的词表为W = {w1, w2, ..., wM}。如果忽略文档中词的序列，我们可以把观察数据记为一个“文档-词”矩阵，如下图所示。</br>
 ![doc-word](https://github.com/ustcdane/NLP/blob/master/PLSA/img/doc-word.png)
-</br></br>这样， 我 们 得 到 了 一 个 基 于 文 档 集 合D = {d1, d2, ..., dN}和 词 表W ={w1, w2, ..., wM}上的观察矩阵N = (n(di, wj))ij。对于每一观察数据< di, wj >我们假设中间关联一个隐含的主题变量zk ∈ {z1, z2, ..., zK}。我们可以认为主题类别zk是文档中所涉及的概念或者主题。每个文档中可以讨论多个概念或者主题。因此原来的观测二元组< di, wj >就被扩展成了三元组< di, zk, wj >，其中zk是非观测值。在观测矩阵N = (n(di, wj))ij上，我们用如下的框架定义生成模型：
+</br></br>这样， 我 们 得 到 了 一 个 基 于 文 档 集 合D = {d1, d2, ..., dN}和 词 表W ={w1, w2, ..., wM}上的观察矩阵N = (n(di, wj))ij。对于每一观察数据< di, wj >我们假设中间关联一个隐含的主题变量zk ∈ {z1, z2, ..., zK}。我们可以认为主题类别zk是文档中所涉及的概念或者主题。每个文档中可以讨论多个概念或者主题。因此原来的观测二元组< di, wj >就被扩展成了三元组< di, zk, wj >，其中zk是非观测值，是隐藏变量。在观测矩阵N = (n(di, wj))ij上，我们用如下的框架定义生成模型：
 
-* 以概率P r(di)选择一个文档di；
-* 以概率Pr(zk|di)挑选一个隐性的主题类别zk。
-* 以概率Pr(wj|zk)生成一个词wj；
+* 以概率p(di)选择一个文档di；
+* 以概率p(zk|di)挑选一个隐性的主题类别zk。
+* 以概率p(wj|zk)生成一个词wj；
 </br>
 用贝叶斯网络的语言描述这个过程如下图所示: </br>
 ![plsa-bayesian](https://github.com/ustcdane/NLP/blob/master/PLSA/img/plsa-bayesian.png)
-
-
-$$x=\frac{-b\pm\sqrt{b^2-4ac}}{2a}
-$$ \\(x=\frac{-b\pm\sqrt{b^2-4ac}}{2a}\\)
-
 </br>
-
-基于上图，我们可以把观测数据<di, wj >的联合概率Pr(di, wj)写成在主题上的边缘概率的和$\sum_{m=0}^\inft P Pr(di, zk, wj)，然后基
-于贝叶斯网络进行分解得到Pr(di, wj) =KX k=1Pr(di)Pr(zk|di)Pr(wj|zk)
-
-
+基于上图，我们可以把观测数据<di, wj >的联合概率p(di, wj)写成在主题上的边缘概率的和SUM_k{p(di, zk, wj)},其中k=1,2...K，然后基
+于贝叶斯网络进行分解得到p(di, wj) =SUM_k{p(di)p(zk|di)p(wj|zk)},k=1,2...K。
+</br>
+![plsa-prob](https://github.com/ustcdane/NLP/blob/master/PLSA/img/plsa-joint.png)
+</br>第一个等式是对三者的联合概率分布对其中的隐藏变量 ZZ 的所有取值累加，第二个等式根据图模型的依赖关系将联合概率展开为条件概率，第三个等式只是简单的乘法结合律。这样就计算出了第 ii 篇文档与第 jj 个单词的联合概率分布。
 
 
 
