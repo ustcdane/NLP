@@ -52,6 +52,12 @@ k is the number of coins
 m is the number of samples
 '''
 
+'''
+ EM is an algorihtm for maximum likelikhood optimization when there is missing inforrmaiton -
+ or when it is useful to add latent augmented variables to simplify maximum likelihood calculatoins.
+'''
+
+
 xs = np.array([(5,5), (9,1), (8,2), (4,6), (7,3)])
 thetas = np.array([[0.6, 0.4], [0.5, 0.5]])
 
@@ -68,16 +74,19 @@ for i in range(max_iter):
 
     ll_new = 0
 
+    # Q is just the posterior distribution of z, and this completes the E-step.
     # E-step: calculate probability distributions over possible completions
     for x in xs:
-
         # multinomial (binomial) log likelihood
+        # each sample for A or B
         ll_A = np.sum([x*np.log(thetas[0])])
         ll_B = np.sum([x*np.log(thetas[1])])
 
+        #  assign weights w to each sample according to how likely it is to be generated from coin A or coin B?
         # [EQN 1]
         denom = np.exp(ll_A) + np.exp(ll_B)
         w_A = np.exp(ll_A)/denom
+
         w_B = np.exp(ll_B)/denom
 
         ws_A.append(w_A)
@@ -93,6 +102,7 @@ for i in range(max_iter):
     # M-step: update values for parameters given current distribution
     # [EQN 2]
     thetas[0] = np.sum(vs_A, 0)/np.sum(vs_A)
+
     thetas[1] = np.sum(vs_B, 0)/np.sum(vs_B)
     # print distribution of z for each x and current parameter estimate
 
