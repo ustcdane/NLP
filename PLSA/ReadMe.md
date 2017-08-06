@@ -80,7 +80,7 @@ python plsa.py dataset3.txt stopwords.dic 30 30 10.0 10 doctopic.txt topicword.t
 
 
 # note (Chinese)
-
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=default"></script>
 ## 1. PLSA
 
 PLSA(Probabilistic Latent Semantic Analysis, 概率潜在语义分析)由LSA发展而来。LSA使用线性代数方法，对document-word矩阵进行SVD分解。PLSA则使用了一个概率图模型，引入了一个隐变量topic（可以认为是文档的主题），然后进行统计推断。
@@ -99,6 +99,10 @@ PLSA(Probabilistic Latent Semantic Analysis, 概率潜在语义分析)由LSA发展而来。LSA
 </br>
 用贝叶斯网络的语言描述这个过程如下图所示: </br>
 ![plsa-bayesian](https://github.com/ustcdane/NLP/blob/master/PLSA/img/plsa-bayesian.png)
+
+
+$$x=\frac{-b\pm\sqrt{b^2-4ac}}{2a}
+$$ \\(x=\frac{-b\pm\sqrt{b^2-4ac}}{2a}\\)
 
 </br>
 
