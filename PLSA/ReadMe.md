@@ -107,10 +107,17 @@ PLSA(Probabilistic Latent Semantic Analysis, 概率潜在语义分析)由LSA发展而来。LSA
 
 ![plsa-prob](https://github.com/ustcdane/NLP/blob/master/PLSA/img/plsa-joint.png)
 
-</br>第一个等式是对三者的联合概率分布对其中的隐藏变量 ZZ 的所有取值累加，第二个等式根据图模型的依赖关系将联合概率展开为条件概率，第三个等式只是简单的乘法结合律。这样就计算出了第 ii 篇文档与第 jj 个单词的联合概率分布。
+</br>第一个等式是对三者的联合概率分布对其中的隐藏变量 Z 的所有取值累加，第二个等式根据图模型的依赖关系将联合概率展开为条件概率，第三个等式只是简单的乘法结合律。这样就计算出了第 i 篇文档与第 j 个单词的联合概率分布。
 
+** complete-data log likelihood **
+我们可以得到完整数据的对数似然为：
 
+![plsa-bayesian](https://github.com/ustcdane/NLP/blob/master/PLSA/img/complete-data.png)
 
+其中 n(di,wj) 表示第 j 个word在第 i 个document中出现的次数。
+上式左边一项对于给定的数据集来说是定值，我们只需要使得右边一项取到最大。
+p(zk|di)和p(wj|zk) 是PLSA模型需要求解的参数,**注意**这里的参数以求和的形式出现在了对数函数之中，求导结果十分复杂，无法使用取偏导数并令偏导为0的方法。
+因为，含有隐变量，因此使用[EM](https://github.com/ustcdane/NLP/tree/master/Expectation%20Maximizatio(EM))算法。
 
 
 ## 3. PLSA 求解
