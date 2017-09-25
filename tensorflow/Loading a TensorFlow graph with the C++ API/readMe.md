@@ -13,3 +13,4 @@ Close the session to release resources.
 
 >
  https://medium.com/jim-fleming/loading-a-tensorflow-graph-with-the-c-api-4caaff88463f
+ https://github.com/tensorflow/tensorflow/tree/master/tensorflow/core/public
