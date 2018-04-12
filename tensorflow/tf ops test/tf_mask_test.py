@@ -21,9 +21,9 @@ w_embed = tf.Variable(tf.random_uniform([vocabulary_size, embedding_size], -1.0,
 # inputs em
 embed = tf.nn.embedding_lookup(w_embed, x)
 # get echo sentence's length
-mask_sum = tf.reduce_sum(in_mask, 0)
+mask_sum = tf.reduce_sum(in_mask, 1)
 
-# xx real data
+# input xx real data
 batch_size=4
 sequence_length=5
 xx=np.zeros((batch_size, sequence_length),dtype=np.int32)
@@ -31,22 +31,28 @@ xx[0][:1] = 1
 xx[1][:3] = 2
 xx[2][:2] = 3 
 xx[3][:4] = 4 
-sq_mask = tf.transpose(tf.sequence_mask([1, 3, 2, 4], maxlen=5, dtype=tf.int32), perm=[1, 0])
+
 sq_mask_float = tf.sequence_mask([1, 3, 2, 4], maxlen=5, dtype=tf.float32)
-sq_mask_float = tf.expand_dims(sq_mask_float,2)
-#sq_mask_float = sq_mask_float[:,:,None]
-mask_em = tf.multiply(embed, sq_mask_float)
+# [batch_size, sentence_len] --> [batch_size, sentence_len, embedding] to multiply inputs embedding
+batch_seq_em_mask = tf.expand_dims(in_mask, 2)
+#batch_seq_em_mask = in_mask[:,:,None]
+
+# To ignore sentence's mask 0 word's embeding
+mask_em = tf.multiply(embed, batch_seq_em_mask)
+#mask_em = embed*batch_seq_em_mask
+
 em_sum = tf.reduce_sum(mask_em, 1)
 # get each sentence's mean embedding
-sen_vec = em_sum /( (mask_sum)[:, None])
+#sen_vec = em_sum /((mask_sum)[:, None])
+sen_vec = em_sum /tf.expand_dims(mask_sum,1)
 
 with tf.Session() as sess:
 	sess.run(tf.global_variables_initializer())
-	one,mask = sess.run([one_hot, sq_mask])
+	one,mask = sess.run([one_hot, sq_mask_float])
 	print 'one_hot:\n', one
-	print 'mask:\n',mask.transpose()
 	print 'input shape:\n', xx.shape
 	print 'input xx:\n', xx
+	print 'mask:\n',mask
 	em, ms, es, sen= sess.run([embed, mask_sum, em_sum,sen_vec], feed_dict={x:xx, in_mask:mask})
 	print 'type(em)', type(em)
 	print 'input embedding shape:', em.shape
