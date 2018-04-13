@@ -1,4 +1,3 @@
-# Lab 7 Learning rate and Evaluation
 import tensorflow as tf
 import random
 tf.set_random_seed(777)  # for reproducibility
