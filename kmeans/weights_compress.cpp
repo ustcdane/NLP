@@ -13,6 +13,21 @@ using namespace std;
 
 void kmeans_cluster(int *cLabel, float *cCentro, float *cNodes, int nNode, int nDimension, int nCluster, float *cInitCentro=nullptr, int max_iter=4000)
 { 
+	if (!cLabel || !cCentro || !cNodes || nNode < 1 || nCluster < 1)
+	{
+		fprintf(stderr,"function kmeans_cluster param error!\n");
+		return;
+	}
+		
+	if (nCluster > nNode)
+	{
+		for (int i = 0; i < nNode; ++i)
+		{
+			cCentro[i] = cNodes[i];
+			cLabel[i] = i;
+		}
+		return;
+	}
 	// get threads number from the env variable
 	int tSize;
 	if (const char* env_omp_tnum = getenv("OMP_NUM_THREADS"))
@@ -163,6 +178,11 @@ void kmeans_cluster(int *cLabel, float *cCentro, float *cNodes, int nNode, int n
 
 void encode_label(int *cmprLabel, int *orgLabel, int num, const int nbit)
 {
+	if (!cmprLabel || !orgLabel)
+	{
+		fprintf(stderr, "function encode_label param error!\n");
+		return;
+	}
 	int mask = 1;
 	for(int i=1; i<nbit; i++)
 		mask |= (mask << 1);
