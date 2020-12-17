@@ -157,8 +157,9 @@ bool Segmentor::Segment(const std::string &input, std::vector<std::string> &res)
 		else
 			single = 0;
 	}
-	if (max_single_len > 6)
+	/*if (max_single_len > 6)
 		return false;
+    */
 
 	for (int i = 0; i < segResult[0]; i++) {
 		//std::cout << this->hz_[segResult[i + 1]] << "\t";
