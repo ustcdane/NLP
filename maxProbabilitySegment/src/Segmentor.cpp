@@ -8,6 +8,15 @@ const int    Segmentor::c_dic_maxlen = 512;
 const int    Segmentor::c_dic_maxsize = 500000;
 const int    Segmentor::c_max_len = 256;
 
+Segmentor* Segmentor::ins_ = nullptr;
+
+Segmentor* Segmentor::instance(const char* dic_name){
+  if(!ins_){
+        ins_ = new Segmentor(dic_name);
+  }
+  return ins_;
+}
+
 
 bool isGBKHZ(unsigned short wc) { // gb18030 has two char
 	unsigned char paramlow = wc & 0xFF;
@@ -157,10 +166,9 @@ bool Segmentor::Segment(const std::string &input, std::vector<std::string> &res)
 		else
 			single = 0;
 	}
-	/*if (max_single_len > 6)
+/*	if (max_single_len > 6)
 		return false;
-    */
-
+*/
 	for (int i = 0; i < segResult[0]; i++) {
 		//std::cout << this->hz_[segResult[i + 1]] << "\t";
 		res.push_back(this->hz_[segResult[i + 1]]);

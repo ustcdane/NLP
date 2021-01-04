@@ -12,7 +12,7 @@
 
 
 #define SENTENCE_MAX_LEN (1024+1)
-#define DEBUG_INFO 1
+//#define DEBUG_INFO 1
 
 typedef int  VocabIndex;
 typedef double VocabFreq;
@@ -30,6 +30,9 @@ public:
 	const static int   c_max_len;
 
 public:
+  static Segmentor* ins_;
+
+public:
 	Segmentor(const char* dic_name):dictSize_(0), hzLongest_(0) {
 		hz_.push_back("");
 		hzFreq_.push_back(0);
@@ -39,6 +42,7 @@ public:
 		calcProbability();
 	}
 	~Segmentor() {}
+  static Segmentor* instance(const char* dic_name);
 	int SegmentFast(const char* words, int len, int* r_ids);
 	bool Segment(const std::string &sentence, std::vector<std::string> &res);
 	int SegmentWrap(const std::string &sentence, std::vector<std::string> &res);
@@ -98,6 +102,7 @@ private:
 public:
 	std::vector<std::string>      hz_;
 	std::vector<int>         hzLength_;
+ 
 private:
 	SIMAP               hzIdHash_;     // To store the dict. <word, index>
 	std::vector<VocabFreq>   hzFreq_;       // word freq
